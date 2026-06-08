@@ -1,0 +1,63 @@
+You are an expert full-stack mobile developer and UI/UX designer. Your task is to build a high-performance, conversion-optimized car rental mobile application inspired by Discover Cars. 
+
+Focus heavily on a clean, trustworthy user interface, ultra-smooth navigation, and a data-driven search architecture.
+
+### 1. CORE TECH STACK & DESIGN SYSTEM
+- Framework: React Native with Expo (TypeScript) OR Flutter (State Management: Bloc/Provider).
+- Styling: Tailwind CSS (NativeWind) or highly modularized styled components.
+- Theme: Clean white backgrounds, high-contrast dark gray text, and a trustworthy Primary Blue (#1565C0) or Vibrant Green (#2E7D32) for call-to-action buttons.
+- Layout: Mobile-first, responsive grid, utilizing clean cards with subtle drop shadows.
+
+### 2. APP STRUCTURE & PAGES TO BUILD
+
+#### Page 1: Search & Discovery (Home Screen)
+- Hero Widget: A prominent search card with fields for:
+  - Pickup Location (with an auto-suggest drop-down menu).
+  - Return Location checkbox ("Return car to the same location").
+  - Pickup Date & Time (using a clean modal calendar picker).
+  - Drop-off Date & Time.
+  - Driver's Age toggle (displays a numeric input if under 30 or over 65).
+- Trust Badges: A horizontal scrolling row showcasing "No Hidden Fees", "24/7 Support", and "Free Cancellation".
+- Promoted Deals: A grid displaying popular car categories (e.g., Economy, SUV, Electric) with starting prices.
+
+#### Page 2: Search Results & Advanced Filtering
+- Top Sticky Bar: Displays a summary of the search criteria (e.g., "London • 12 Jul - 19 Jul") with an "Edit" button.
+- Quick Sorting Filters: Tabs for "Cheapest", "Best Rated", and "Closest".
+- Advanced Filter Modal: Grouped filter options including:
+  - Car Specifications (Transmission: Manual/Automatic, Fuel: Electric/Hybrid/Petrol).
+  - Supplier Rating (Excellent 8+, Very Good 7+).
+  - Rental Company (Hertz, Avis, Local suppliers).
+  - Fuel Policy (Full-to-Full, Same-to-Same).
+  - Deposit Amount slider.
+- Vehicle Cards: Clean list view items showing:
+  - High-res car image, model name, and "or similar" text.
+  - Vendor logo, supplier rating score (e.g., "8.5 Superb"), and review count.
+  - Icon grid for specs (4 Seats, 2 Bags, Aircon, Automatic).
+  - Pricing Breakdown: Total price highlighted in bold, with a micro-text breakdown of the daily rate.
+  - Immediate action button: "View Deal".
+
+#### Page 3: Car Selection & Deep Details
+- Image Carousel: Multi-angle photos of the selected vehicle.
+- Critical Information Grid: Detailed breakdown of "What's Included" (e.g., Third-Party Liability, Theft Protection, Unlimited Mileage) vs. "What's Extra".
+- Location Details: Clear pickup instructions (e.g., "In-terminal counter", "Free Shuttle Bus").
+- Cross-Sell Section (Full Coverage Insurance Widget):
+  - A highly visual toggle card explaining the benefits of adding "Full Coverage" (deductible protection, window/tire damage).
+  - Shows an explicit price per day and a clear "Add Protection" checkbox.
+
+#### Page 4: Checkout & Secure Booking
+- Step Indicator: Visual timeline (1. Driver Info -> 2. Payment -> 3. Confirmed).
+- Forms: Fields for Full Name, Email, Phone Number, and Flight Number (optional, for delays).
+- Payment Gateway Integration UI: Secured fields for Credit/Debit card entry, Apple Pay, and Google Pay badges.
+- Final Price Summary: Sidebar or bottom sticky sheet showing Base Rental, Full Coverage (if selected), Local Taxes, and Total Due Now vs. Payable at Desk.
+
+### 3. API & DATA ARCHITECTURE (Mock Data)
+- Create a robust mock data service mimicking a real vehicle aggregator API.
+- The dataset must include at least 15 unique car types across 5 different rental suppliers.
+- Each vehicle object must contain: `id`, `name`, `type`, `supplierName`, `supplierLogo`, `rating`, `priceTotal`, `pricePerDay`, `transmission`, `fuelPolicy`, and `features[]`.
+
+### 4. NON-FUNCTIONAL IMPLEMENTATION RULES
+- Componentization: Keep layouts modular. Separate UI components into `/components`, layouts into `/screens`, and logic into `/hooks`.
+- State Management: Ensure booking data passes flawlessly from the Search Results screen to Checkout.
+- Micro-interactions: Implement smooth skeleton loaders during search transitions, and active button states.
+
+Please generate the complete source code, directory layout, and entry files for this application. Ensure it is fully interactive and ready to run.
