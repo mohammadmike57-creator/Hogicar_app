@@ -20,6 +20,9 @@ SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
 
+const BLUE = "#1565C0";
+const WHITE = "#FFFFFF";
+
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
     Inter_400Regular,
@@ -44,16 +47,21 @@ export default function RootLayout() {
             <KeyboardProvider>
               <BookingProvider>
                 <Stack screenOptions={{ headerShown: false }}>
-                  <Stack.Screen name="(tabs)" />
+                  <Stack.Screen
+                    name="onboarding"
+                    options={{ headerShown: false, gestureEnabled: false, animation: "fade" }}
+                  />
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                   <Stack.Screen
                     name="results"
                     options={{
                       headerShown: true,
                       headerTitle: "Search Results",
                       headerBackTitle: "Back",
-                      headerTintColor: "#1565C0",
-                      headerStyle: { backgroundColor: "#FFFFFF" },
+                      headerTintColor: BLUE,
+                      headerStyle: { backgroundColor: WHITE },
                       headerShadowVisible: false,
+                      headerTitleStyle: { fontFamily: "Inter_600SemiBold", fontSize: 17 },
                     }}
                   />
                   <Stack.Screen
@@ -62,8 +70,8 @@ export default function RootLayout() {
                       headerShown: true,
                       headerTitle: "",
                       headerBackTitle: "Results",
-                      headerTintColor: "#1565C0",
-                      headerStyle: { backgroundColor: "#FFFFFF" },
+                      headerTintColor: BLUE,
+                      headerStyle: { backgroundColor: WHITE },
                       headerShadowVisible: false,
                       headerTransparent: true,
                     }}
@@ -74,17 +82,15 @@ export default function RootLayout() {
                       headerShown: true,
                       headerTitle: "Secure Booking",
                       headerBackTitle: "Details",
-                      headerTintColor: "#1565C0",
-                      headerStyle: { backgroundColor: "#FFFFFF" },
+                      headerTintColor: BLUE,
+                      headerStyle: { backgroundColor: WHITE },
                       headerShadowVisible: false,
+                      headerTitleStyle: { fontFamily: "Inter_600SemiBold", fontSize: 17 },
                     }}
                   />
                   <Stack.Screen
                     name="confirmed"
-                    options={{
-                      headerShown: false,
-                      gestureEnabled: false,
-                    }}
+                    options={{ headerShown: false, gestureEnabled: false }}
                   />
                 </Stack>
               </BookingProvider>
