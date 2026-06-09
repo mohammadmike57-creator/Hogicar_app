@@ -9,6 +9,7 @@ import {
   Image,
   Easing,
 } from "react-native";
+import { Image as ExpoImage } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
@@ -18,6 +19,8 @@ import HogiCarLogo from "@/components/HogiCarLogo";
 
 const { width, height } = Dimensions.get("window");
 
+const AnimatedExpoImage = Animated.createAnimatedComponent(ExpoImage);
+
 /* ─── Slide data ────────────────────────────────────────────────── */
 const SLIDES = [
   {
@@ -26,7 +29,7 @@ const SLIDES = [
     tag: "PREMIUM FLEET",
     headline: "Find Your\nPerfect Car",
     sub: "Search over 10,000 vehicles from the world's top rental suppliers in seconds.",
-    image: require("../assets/images/car-sedan.png"),
+    image: require("../assets/images/avis.svg"),
     glow: "#1565C0",
   },
   {
@@ -35,7 +38,7 @@ const SLIDES = [
     tag: "BEST PRICES",
     headline: "No Hidden\nFees. Ever.",
     sub: "Full price transparency from search to checkout. Compare 500+ suppliers and save up to 40%.",
-    image: require("../assets/images/car-suv.png"),
+    image: require("../assets/images/hertz.svg"),
     glow: "#00A86B",
   },
   {
@@ -44,7 +47,7 @@ const SLIDES = [
     tag: "INSTANT BOOKING",
     headline: "Booked in Under\n2 Minutes",
     sub: "Secure checkout, instant confirmation, and 24/7 expert support wherever you are.",
-    image: require("../assets/images/car-electric.png"),
+    image: require("../assets/images/sixt.svg"),
     glow: "#F57C00",
   },
 ];
@@ -193,13 +196,13 @@ export default function OnboardingScreen() {
 
             {/* Car image — center stage */}
             <View style={ss.carStage}>
-              <Animated.Image
+              <AnimatedExpoImage
                 source={slide.image}
                 style={[
                   ss.carImg,
                   { transform: [{ translateY: floatAnim }] },
                 ]}
-                resizeMode="contain"
+                contentFit="contain"
               />
             </View>
 
