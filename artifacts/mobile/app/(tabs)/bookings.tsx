@@ -11,8 +11,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
+import HogiCarLogo from "@/components/HogiCarLogo";
 
-const PRIMARY = "#1565C0";
+const PRIMARY = "#123C69";
 
 const PAST_BOOKINGS = [
   {
@@ -95,12 +96,13 @@ export default function BookingsScreen() {
     <View style={[s.root, { paddingTop: topPad }]}>
       {/* Header gradient */}
       <LinearGradient
-        colors={["#0D47A1", "#1565C0"]}
+        colors={["#060E1C", "#0C1E3A", "#123C69"]}
         style={s.header}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
         <View style={s.headerOrb} />
+        <HogiCarLogo variant="onDark" size="xs" />
         <Text style={s.headerTitle} allowFontScaling={false}>My Bookings</Text>
         <Text style={s.headerSub} allowFontScaling={false}>
           {UPCOMING.length} upcoming · {PAST_BOOKINGS.filter(b => b.status === "completed").length} completed

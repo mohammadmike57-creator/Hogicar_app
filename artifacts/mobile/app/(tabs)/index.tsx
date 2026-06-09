@@ -18,6 +18,7 @@ import * as Haptics from "expo-haptics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useBooking } from "@/context/BookingContext";
+import HogiCarLogo from "@/components/HogiCarLogo";
 import TrustBadges from "@/components/TrustBadges";
 import CategoryGrid from "@/components/CategoryGrid";
 import DatePickerModal from "@/components/DatePickerModal";
@@ -88,7 +89,7 @@ export default function HomeScreen() {
       >
         {/* ── Hero gradient header ─────────────────────────────────── */}
         <LinearGradient
-          colors={["#0D47A1", "#1565C0", "#1976D2"]}
+          colors={["#060E1C", "#0C1E3A", "#123C69"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={s.hero}
@@ -97,15 +98,18 @@ export default function HomeScreen() {
           <View style={s.heroOrb1} />
           <View style={s.heroOrb2} />
 
-          {/* Top bar */}
+          {/* Logo + notification */}
           <View style={s.topBar}>
-            <View>
-              <Text style={s.heroGreet} allowFontScaling={false}>Welcome back 👋</Text>
-              <Text style={s.heroTitle} allowFontScaling={false}>Find your perfect car</Text>
-            </View>
+            <HogiCarLogo variant="onDark" size="sm" />
             <TouchableOpacity style={s.avatarBtn}>
               <Feather name="bell" size={18} color="#FFF" />
             </TouchableOpacity>
+          </View>
+
+          {/* Tagline */}
+          <View style={s.heroTextBlock}>
+            <Text style={s.heroGreet} allowFontScaling={false}>Your journey starts here</Text>
+            <Text style={s.heroTitle} allowFontScaling={false}>Find your{"\n"}perfect car</Text>
           </View>
 
           {/* Stats row */}
@@ -304,26 +308,6 @@ export default function HomeScreen() {
           }}
         />
 
-        {/* ── Why choose us ─────────────────────────────────────────── */}
-        <View style={s.sectionHead}>
-          <Text style={s.sectionTitle} allowFontScaling={false}>Why choose us</Text>
-        </View>
-        <View style={s.whyGrid}>
-          {[
-            { icon: "shield" as const, title: "No Hidden Fees", body: "The price you see is the price you pay. Always.", color: "#EEF4FF" },
-            { icon: "zap" as const, title: "Instant Booking", body: "Confirm your car in under 2 minutes.", color: "#FFF7ED" },
-            { icon: "star" as const, title: "Top Rated", body: "Every supplier verified by real travellers.", color: "#F0FDF4" },
-            { icon: "headphones" as const, title: "24/7 Support", body: "Our team is always here to help you.", color: "#FDF4FF" },
-          ].map((w) => (
-            <View key={w.title} style={[s.whyCard, { backgroundColor: w.color }]}>
-              <View style={s.whyIconWrap}>
-                <Feather name={w.icon} size={20} color="#1565C0" />
-              </View>
-              <Text style={s.whyTitle} allowFontScaling={false}>{w.title}</Text>
-              <Text style={s.whyBody} allowFontScaling={false}>{w.body}</Text>
-            </View>
-          ))}
-        </View>
       </ScrollView>
 
       {/* ── Modals ──────────────────────────────────────────────────── */}
@@ -412,10 +396,11 @@ const s = StyleSheet.create({
     hero: {
       paddingHorizontal: 20,
       paddingTop: 16,
-      paddingBottom: 64,
+      paddingBottom: 72,
       overflow: "hidden",
       position: "relative",
     },
+    heroTextBlock: { marginTop: 16, marginBottom: 18 },
     heroOrb1: {
       position: "absolute",
       width: 220,
@@ -435,8 +420,8 @@ const s = StyleSheet.create({
       left: -30,
     },
     topBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 18 },
-    heroGreet: { fontSize: 13, fontFamily: "Inter_400Regular", color: "rgba(255,255,255,0.7)", marginBottom: 3 },
-    heroTitle: { fontSize: 24, fontFamily: "Inter_700Bold", color: "#FFFFFF", lineHeight: 30 },
+    heroGreet: { fontSize: 13, fontFamily: "Inter_400Regular", color: "rgba(255,255,255,0.65)", marginBottom: 6 },
+    heroTitle: { fontSize: 30, fontFamily: "Inter_700Bold", color: "#FFFFFF", lineHeight: 38, letterSpacing: -0.5 },
     avatarBtn: {
       width: 40, height: 40, borderRadius: 12,
       backgroundColor: "rgba(255,255,255,0.15)",
@@ -595,6 +580,7 @@ const s = StyleSheet.create({
       gap: 8,
       paddingVertical: 16,
       paddingHorizontal: 24,
+      backgroundColor: "#123C69",
     },
     searchBtnText: { fontSize: 16, fontFamily: "Inter_700Bold", color: "#FFF", flex: 1, textAlign: "center" },
     searchBtnArrow: {

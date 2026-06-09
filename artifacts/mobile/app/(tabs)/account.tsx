@@ -13,8 +13,9 @@ import { Feather } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
+import HogiCarLogo from "@/components/HogiCarLogo";
 
-const PRIMARY = "#1565C0";
+const PRIMARY = "#123C69";
 
 type RowIcon = React.ComponentProps<typeof Feather>["name"];
 
@@ -66,12 +67,15 @@ export default function AccountScreen() {
     <View style={[s.root, { paddingTop: topPad }]}>
       {/* Header */}
       <LinearGradient
-        colors={["#0D47A1", "#1565C0"]}
+        colors={["#060E1C", "#0C1E3A", "#123C69"]}
         style={s.header}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
         <View style={s.headerOrb} />
+        <View style={{ marginBottom: 16 }}>
+          <HogiCarLogo variant="onDark" size="xs" />
+        </View>
         <View style={s.profileRow}>
           <View style={s.avatar}>
             <Text style={s.avatarText} allowFontScaling={false}>JD</Text>
