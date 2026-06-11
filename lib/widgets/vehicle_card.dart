@@ -55,13 +55,18 @@ class VehicleCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: car.isHogicarChoiceBranded ? const Color(0xFFF0FDF4) : Colors.white,
           borderRadius: BorderRadius.circular(16),
+          border: car.isHogicarChoiceBranded 
+            ? Border.all(color: const Color(0xFF008009), width: 1.5)
+            : null,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+              color: car.isHogicarChoiceBranded 
+                ? const Color(0xFF008009).withOpacity(0.15)
+                : Colors.black.withOpacity(0.05),
+              blurRadius: 12,
+              offset: const Offset(0, 5),
             ),
           ],
         ),
@@ -101,6 +106,43 @@ class VehicleCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (car.isHogicarChoiceBranded)
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF008009), Color(0xFF00A30B)],
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF008009).withOpacity(0.3),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.stars, size: 12, color: Colors.white),
+                          const SizedBox(width: 4),
+                          Text(
+                            "RECOMMENDED",
+                            style: GoogleFonts.inter(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
               ],
             ),
             // Body Section
