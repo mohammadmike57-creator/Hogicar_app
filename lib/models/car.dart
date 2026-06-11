@@ -25,6 +25,7 @@ class Car {
   final String mileagePolicy;
   final List<String> coverage;
   final bool isHogicarChoice;
+  final bool isHogicarChoiceBranded;
 
   Car({
     required this.id,
@@ -53,6 +54,7 @@ class Car {
     required this.mileagePolicy,
     required this.coverage,
     this.isHogicarChoice = false,
+    this.isHogicarChoiceBranded = false,
   });
 
   factory Car.fromJson(Map<String, dynamic> json) {
@@ -85,6 +87,7 @@ class Car {
           ? List<String>.from(json['coverage']) 
           : ['Collision Damage Waiver', 'Theft Protection', 'Third Party Liability'],
       isHogicarChoice: json['hogicarChoice'] ?? false,
+      isHogicarChoiceBranded: json['isHogicarChoiceBranded'] ?? false,
     );
   }
 
@@ -115,6 +118,7 @@ class Car {
     String? mileagePolicy,
     List<String>? coverage,
     bool? isHogicarChoice,
+    bool? isHogicarChoiceBranded,
   }) {
     return Car(
       id: id ?? this.id,
@@ -143,6 +147,7 @@ class Car {
       mileagePolicy: mileagePolicy ?? this.mileagePolicy,
       coverage: coverage ?? this.coverage,
       isHogicarChoice: isHogicarChoice ?? this.isHogicarChoice,
+      isHogicarChoiceBranded: isHogicarChoiceBranded ?? this.isHogicarChoiceBranded,
     );
   }
 }

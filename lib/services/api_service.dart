@@ -184,14 +184,16 @@ class ApiService {
         final List<Car> finalCars = [];
         
         for (var car in cars) {
-          finalCars.add(car);
-          // If it's a Hogi Car Choice and not already branded as such, add a duplicate
+          // Original car should NOT be branded as Hogi Car Choice in the UI
+          finalCars.add(car.copyWith(isHogicarChoiceBranded: false));
+          
           if (car.isHogicarChoice && car.rentalCompany != 'Hogi Car Choice') {
             finalCars.add(car.copyWith(
               id: 'choice-${car.id}',
               rentalCompany: 'Hogi Car Choice',
               rentalCompanyLogo: 'HOGICAR_CHOICE_LOGO',
               isHogicarChoice: true,
+              isHogicarChoiceBranded: true,
             ));
           }
         }
