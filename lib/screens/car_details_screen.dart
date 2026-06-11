@@ -180,8 +180,8 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
                   ],
                 ),
               ),
-              if (widget.car.rentalCompanyLogo == 'HOGICAR_CHOICE_LOGO')
-                const HogiCarLogo(height: 40, showText: false)
+              if (widget.car.rentalCompanyLogo == 'HOGICAR_CHOICE_LOGO' || widget.car.rentalCompany == 'Hogi Car Choice')
+                const HogiCarLogo(height: 32, showText: true)
               else if (widget.car.rentalCompanyLogo.isNotEmpty)
                 Container(
                   width: 50,

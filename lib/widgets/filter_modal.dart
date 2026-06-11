@@ -3,11 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FilterModal extends StatefulWidget {
   final Map<String, dynamic> filters;
+  final List<String> availableSuppliers;
   final Function(Map<String, dynamic>) onApply;
 
   const FilterModal({
     super.key,
     required this.filters,
+    required this.availableSuppliers,
     required this.onApply,
   });
 
@@ -19,6 +21,7 @@ class _FilterModalState extends State<FilterModal> {
   late String _transmission;
   late String _fuelType;
   late double _minRating;
+  late List<String> _selectedSuppliers;
 
   @override
   void initState() {
@@ -26,6 +29,7 @@ class _FilterModalState extends State<FilterModal> {
     _transmission = widget.filters['transmission'] ?? 'All';
     _fuelType = widget.filters['fuelType'] ?? 'All';
     _minRating = (widget.filters['minRating'] ?? 0.0).toDouble();
+    _selectedSuppliers = List<String>.from(widget.filters['suppliers'] ?? []);
   }
 
   @override
@@ -49,6 +53,19 @@ class _FilterModalState extends State<FilterModal> {
           ),
           const SizedBox(height: 16),
           Text("Filters", style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w700, color: const Color(0xFF1A1A2E))),
+          const SizedBox(height: 24),
+          Text("Suppliers", style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: const Color(0xFF1A1A2E))),
+          const SizedBox(height: 12),
+          SizedBox(
+            height: 40,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: widget.availableSuppliers.map((s) {
+                final isSelected = _selectedSuppliers.contains(s);
+                return _buildOptionChip("supplier", s, isSelected);
+              }).toList(),
+            ),
+          ),
           const SizedBox(height: 24),
           Text("Transmission", style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: const Color(0xFF1A1A2E))),
           const SizedBox(height: 12),
@@ -80,6 +97,7 @@ class _FilterModalState extends State<FilterModal> {
                   'transmission': _transmission,
                   'fuelType': _fuelType,
                   'minRating': _minRating,
+                  'suppliers': _selectedSuppliers,
                 });
                 Navigator.pop(context);
               },
@@ -101,8 +119,17 @@ class _FilterModalState extends State<FilterModal> {
   Widget _buildOptionChip(String type, String label, bool selected) {
     return GestureDetector(
       onTap: () => setState(() {
-        if (type == 'transmission') _transmission = label;
-        else _fuelType = label;
+        if (type == 'transmission') {
+          _transmission = label;
+        } else if (type == 'fuelType') {
+          _fuelType = label;
+        } else if (type == 'supplier') {
+          if (_selectedSuppliers.contains(label)) {
+            _selectedSuppliers.remove(label);
+          } else {
+            _selectedSuppliers.add(label);
+          }
+        }
       }),
       child: Container(
         margin: const EdgeInsets.only(right: 8),

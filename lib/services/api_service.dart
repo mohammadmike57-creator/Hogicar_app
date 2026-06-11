@@ -180,7 +180,22 @@ class ApiService {
 
       final data = await _handleResponse(response);
       if (data != null && data is List) {
-        return data.map((json) => Car.fromJson(json)).toList();
+        final List<Car> cars = data.map((json) => Car.fromJson(json)).toList();
+        final List<Car> finalCars = [];
+        
+        for (var car in cars) {
+          finalCars.add(car);
+          // If it's a Hogi Car Choice and not already branded as such, add a duplicate
+          if (car.isHogicarChoice && car.rentalCompany != 'Hogi Car Choice') {
+            finalCars.add(car.copyWith(
+              id: 'choice-${car.id}',
+              rentalCompany: 'Hogi Car Choice',
+              rentalCompanyLogo: 'HOGICAR_CHOICE_LOGO',
+              isHogicarChoice: true,
+            ));
+          }
+        }
+        return finalCars;
       }
     } catch (e) {
       print('Error searching cars: $e');

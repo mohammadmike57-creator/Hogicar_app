@@ -128,8 +128,8 @@ class VehicleCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      if (car.rentalCompanyLogo == 'HOGICAR_CHOICE_LOGO')
-                        const HogiCarLogo(height: 36, showText: false)
+                      if (car.rentalCompanyLogo == 'HOGICAR_CHOICE_LOGO' || car.rentalCompany == 'Hogi Car Choice')
+                        const HogiCarLogo(height: 32, showText: true)
                       else if (car.rentalCompanyLogo.isNotEmpty)
                         Container(
                           width: 48,

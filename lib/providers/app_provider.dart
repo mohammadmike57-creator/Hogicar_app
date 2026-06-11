@@ -201,6 +201,9 @@ class AppProvider with ChangeNotifier {
   bool _filterInTerminal = false;
   bool _filterFreeCancellation = false;
   List<String> _selectedSuppliers = [];
+  String _filterTransmission = 'All';
+  String _filterFuelType = 'All';
+  double _minRating = 0.0;
   int _currentTabIndex = 0;
 
   UserProfile? get user => _user;
@@ -228,6 +231,9 @@ class AppProvider with ChangeNotifier {
   bool get filterInTerminal => _filterInTerminal;
   bool get filterFreeCancellation => _filterFreeCancellation;
   List<String> get selectedSuppliers => _selectedSuppliers;
+  String get filterTransmission => _filterTransmission;
+  String get filterFuelType => _filterFuelType;
+  double get minRating => _minRating;
 
   List<String> get availableSuppliers {
     return _cars.map((c) => c.rentalCompany).toSet().toList()..sort();
@@ -239,6 +245,19 @@ class AppProvider with ChangeNotifier {
     } else {
       _selectedSuppliers.add(supplier);
     }
+    notifyListeners();
+  }
+
+  void setFilters({
+    String? transmission,
+    String? fuelType,
+    double? minRating,
+    List<String>? suppliers,
+  }) {
+    if (transmission != null) _filterTransmission = transmission;
+    if (fuelType != null) _filterFuelType = fuelType;
+    if (minRating != null) _minRating = minRating;
+    if (suppliers != null) _selectedSuppliers = suppliers;
     notifyListeners();
   }
 
@@ -332,6 +351,10 @@ class AppProvider with ChangeNotifier {
       if (_filterDisinfected && !car.isDisinfected) return false;
       if (_filterInTerminal && !car.isInTerminal) return false;
       if (_filterFreeCancellation && !car.freeCancellation) return false;
+      if (_selectedSuppliers.isNotEmpty && !_selectedSuppliers.contains(car.rentalCompany)) return false;
+      if (_filterTransmission != 'All' && car.transmission.toLowerCase() != _filterTransmission.toLowerCase()) return false;
+      if (_filterFuelType != 'All' && car.fuelType.toLowerCase() != _filterFuelType.toLowerCase()) return false;
+      if (car.rating < _minRating) return false;
       return true;
     }).toList();
   }

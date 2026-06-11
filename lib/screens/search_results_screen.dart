@@ -23,6 +23,15 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
     'minRating': 0.0,
   };
 
+  Map<String, dynamic> _getFilterMap(AppProvider provider) {
+    return {
+      'transmission': provider.filterTransmission,
+      'fuelType': provider.filterFuelType,
+      'minRating': provider.minRating,
+      'suppliers': provider.selectedSuppliers,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<AppProvider>();
@@ -143,8 +152,16 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
                 builder: (context) => FilterModal(
-                  filters: _filters,
-                  onApply: (f) => setState(() => _filters = f),
+                  filters: _getFilterMap(provider),
+                  availableSuppliers: provider.availableSuppliers,
+                  onApply: (f) {
+                    provider.setFilters(
+                      transmission: f['transmission'],
+                      fuelType: f['fuelType'],
+                      minRating: f['minRating'],
+                      suppliers: f['suppliers'],
+                    );
+                  },
                 ),
               );
             },
